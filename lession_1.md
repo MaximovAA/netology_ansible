@@ -7,6 +7,7 @@
 3. Скачайте [Playbook](./playbook/) из репозитория с домашним заданием и перенесите его в свой репозиторий.
 
 ## Основная часть
+[Ветка с исходными файлами](https://github.com/MaximovAA/netology_ansible/tree/master "Пример вывода команд")
 
 1. Попробуйте запустить playbook на окружении из `test.yml`, зафиксируйте значение, которое имеет факт `some_fact` для указанного хоста при выполнении playbook.
 ![sec](https://github.com/MaximovAA/school/blob/main/06_1.jpg "Пример вывода команд")

@@ -12,8 +12,8 @@
     - block:
         - name: Get vector distrib
           ansible.builtin.get_url:
-            url: "https://yum.vector.dev/stable/vector-0/x86_64/vector-0.34.1-1.x86_64.rpm"
-            dest: "./vector-0.34.1-1.x86_64.rpm"
+            url: "https://packages.timber.io/vector/{{ vector_version }}/vector-{{ vector_version }}-1.{{ ansible_architecture }}.rpm"
+            dest: "/home/centos/vector-{{ vector_version }}.rpm"
     - name: Install clickhouse packages
       become: true
       ansible.builtin.yum:
@@ -27,8 +27,5 @@
          src: ./group_vars/vector.yaml.j2
          mode: 0644
          dest: /etc/vector/vector.yaml
-         owner: bin
-         group: wheel
-    - name: Restart Vector
-      become: true
-      ansible.builtin.command: "systemctl restart vector"
+         owner: vector
+         group: vector

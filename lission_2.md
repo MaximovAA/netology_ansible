@@ -25,14 +25,15 @@
 
 ##Основные компоненты  
 В процессе установки будем использовать 
-  -[/group_vars
-    -[clickhouse
-      -[vars.yml
-    -[vector.yaml.j2
-  -[/invetnory
-    -[prod.yml
-  -[site.yaml
-  -[vector.yaml
+  -/group_vars  
+      -clickhouse  
+         -vars.yml  
+      -vector.yaml.j2  
+  -/invetnory  
+      -prod.yml  
+  -site.yaml  
+  -vector.yaml  
+  
 ##Конфигурация основного плейбука
   
 ```yaml

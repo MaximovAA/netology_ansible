@@ -14,14 +14,12 @@
           ansible.builtin.get_url:
             url: "https://packages.timber.io/vector/{{ vector_version }}/vector-{{ vector_version }}-1.{{ ansible_architecture }}.rpm"
             dest: "/home/centos/vector-{{ vector_version }}.rpm"
-    - name: Install clickhouse packages
+    - name: Install vector packages
       become: true
       ansible.builtin.yum:
         name:
           - vector-0.34.1-1.x86_64.rpm
-      notify: Start vector service
-    - name: Flush handlers
-      meta: flush_handlers
+      notify: Restarted service
     - name: write using jinja2
       ansible.builtin.template:
          src: ./group_vars/vector.yaml.j2

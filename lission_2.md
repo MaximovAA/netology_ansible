@@ -23,10 +23,17 @@
 ![Ветка с исходными файлами](https://github.com/MaximovAA/school/blob/main/06-02-playbook.jpg "Пример вывода команд")
 ![Ветка с исходными файлами](https://github.com/MaximovAA/school/blob/main/06-02-vector.jpg "Пример вывода команд")
 
-#Основные компоненты  
+##Основные компоненты  
 В процессе установки будем использовать 
-
-#Конфигурация основного плейбука
+  -[/group_vars
+    -[clickhouse
+      -[vars.yml
+    -[vector.yaml.j2
+  -[/invetnory
+    -[prod.yml
+  -[site.yaml
+  -[vector.yaml
+##Конфигурация основного плейбука
   
 ```yaml
 ---
@@ -67,7 +74,7 @@
       changed_when: create_db.rc == 0
 
 ```
-#Конфигурация установки Vector
+##Конфигурация установки Vector
 ```yaml
 ---
 - name: Install Vector

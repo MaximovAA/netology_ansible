@@ -23,6 +23,89 @@
 ![Ветка с исходными файлами](https://github.com/MaximovAA/school/blob/main/06-02-playbook.jpg "Пример вывода команд")
 ![Ветка с исходными файлами](https://github.com/MaximovAA/school/blob/main/06-02-vector.jpg "Пример вывода команд")
 
+#Основные компоненты  
+В процессе установки будем использовать 
+
+#Конфигурация основного плейбука
+  
+```yaml
+---
+- name: Install Clickhouse
+  hosts: clickhouse
+  handlers:
+    - name: Start clickhouse service
+      become: true
+      ansible.builtin.service:
+        name: clickhouse-server
+        state: restarted
+  tasks:
+    - block:
+        - name: Get clickhouse distrib
+          ansible.builtin.get_url:
+            url: "https://packages.clickhouse.com/rpm/stable/{{ item }}-{{ clickhouse_version }}.noarch.rpm"
+            dest: "./{{ item }}-{{ clickhouse_version }}.rpm"
+          with_items: "{{ clickhouse_packages }}"
+      rescue:
+        - name: Get clickhouse distrib
+          ansible.builtin.get_url:
+            url: "https://packages.clickhouse.com/rpm/stable/clickhouse-common-static-{{ clickhouse_version }}.x86_64.rpm"
+            dest: "./clickhouse-common-static-{{ clickhouse_version }}.rpm"
+    - name: Install clickhouse packages
+      become: true
+      ansible.builtin.yum:
+        name:
+          - clickhouse-common-static-{{ clickhouse_version }}.rpm
+          - clickhouse-client-{{ clickhouse_version }}.rpm
+          - clickhouse-server-{{ clickhouse_version }}.rpm
+      notify: Start clickhouse service
+    - name: Flush handlers
+      meta: flush_handlers
+    - name: Create database
+      ansible.builtin.command: "clickhouse-client -q 'create database logs;'"
+      register: create_db
+      failed_when: create_db.rc != 0 and create_db.rc !=82
+      changed_when: create_db.rc == 0
+
+```
+#Конфигурация установки Vector
+```yaml
+---
+- name: Install Vector
+  become: yes
+  become_user: root
+  hosts: clickhouse
+  handlers:
+    - name: Start vector service
+      ansible.builtin.service:
+        name: vector
+        state: restarted
+  tasks:
+    - block:
+        - name: Get vector distrib
+          ansible.builtin.get_url:
+            url: "https://yum.vector.dev/stable/vector-0/x86_64/vector-0.34.1-1.x86_64.rpm"
+            dest: "./vector-0.34.1-1.x86_64.rpm"
+    - name: Install clickhouse packages
+      become: true
+      ansible.builtin.yum:
+        name:
+          - vector-0.34.1-1.x86_64.rpm
+      notify: Start vector service
+    - name: Flush handlers
+      meta: flush_handlers
+    - name: write using jinja2
+      ansible.builtin.template:
+         src: ./group_vars/vector.yaml.j2
+         mode: 0644
+         dest: /etc/vector/vector.yaml
+         owner: bin
+         group: wheel
+    - name: Restart Vector
+      become: true
+      ansible.builtin.command: "systemctl restart vector"
+```
+
+
 ---
 
 ### Как оформить решение задания

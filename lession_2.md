@@ -24,6 +24,8 @@ ___
 
 
 ![Ветка с исходными файлами](https://github.com/MaximovAA/school/blob/main/06-02-playbook.jpg "Пример вывода команд")
+___
+
 ![Ветка с исходными файлами](https://github.com/MaximovAA/school/blob/main/06-02-vector.jpg "Пример вывода команд")
 
 ___

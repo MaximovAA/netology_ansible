@@ -23,8 +23,11 @@
 ![Ветка с исходными файлами](https://github.com/MaximovAA/school/blob/main/06-02-playbook.jpg "Пример вывода команд")
 ![Ветка с исходными файлами](https://github.com/MaximovAA/school/blob/main/06-02-vector.jpg "Пример вывода команд")
 
+___
+
 ##Основные компоненты  
 В процессе установки будем использовать 
+ ```
   -/group_vars  
       -clickhouse  
          -vars.yml  
@@ -33,7 +36,9 @@
       -prod.yml  
   -site.yaml  
   -vector.yaml  
-  
+  ```
+___
+
 ##Конфигурация основного плейбука
   
 ```yaml
@@ -75,6 +80,8 @@
       changed_when: create_db.rc == 0
 
 ```
+___
+
 ##Конфигурация установки Vector
 ```yaml
 ---
@@ -112,6 +119,8 @@
       become: true
       ansible.builtin.command: "systemctl restart vector"
 ```
+___
+
 
 
 ---

@@ -20,6 +20,9 @@
 9. Подготовьте README.md-файл по своему playbook. В нём должно быть описано: что делает playbook, какие у него есть параметры и теги. Пример качественной документации ansible playbook по [ссылке](https://github.com/opensearch-project/ansible-playbook).
 10. Готовый playbook выложите в свой репозиторий, поставьте тег `08-ansible-02-playbook` на фиксирующий коммит, в ответ предоставьте ссылку на него.
 
+![Ветка с исходными файлами](https://github.com/MaximovAA/school/blob/main/06-02-playbook.jpg "Пример вывода команд")
+![Ветка с исходными файлами](https://github.com/MaximovAA/school/blob/main/06-02-vector.jpg "Пример вывода команд")
+
 ---
 
 ### Как оформить решение задания

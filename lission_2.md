@@ -51,6 +51,7 @@ ___
   
 ```yaml
 ---
+#Объявляем группы хостов и объявляем правило перезапуска сервиса
 - name: Install Clickhouse
   hosts: clickhouse
   handlers:
@@ -59,6 +60,8 @@ ___
       ansible.builtin.service:
         name: clickhouse-server
         state: restarted
+#Основной блок выполнения
+#Определяем и загружаем дистрибутив
   tasks:
     - block:
         - name: Get clickhouse distrib
@@ -71,6 +74,7 @@ ___
           ansible.builtin.get_url:
             url: "https://packages.clickhouse.com/rpm/stable/clickhouse-common-static-{{ clickhouse_version }}.x86_64.rpm"
             dest: "./clickhouse-common-static-{{ clickhouse_version }}.rpm"
+#Запускаем установку
     - name: Install clickhouse packages
       become: true
       ansible.builtin.yum:
@@ -79,8 +83,10 @@ ___
           - clickhouse-client-{{ clickhouse_version }}.rpm
           - clickhouse-server-{{ clickhouse_version }}.rpm
       notify: Start clickhouse service
+#Отчищаем историю выполнения handlers
     - name: Flush handlers
       meta: flush_handlers
+#Создаем базу данных
     - name: Create database
       ansible.builtin.command: "clickhouse-client -q 'create database logs;'"
       register: create_db
@@ -93,6 +99,7 @@ ___
 **#Конфигурация установки Vector**
 ```yaml
 ---
+#Объявляем группы хостов и объявляем правило перезапуска сервиса
 - name: Install Vector
   become: yes
   become_user: root
@@ -102,20 +109,25 @@ ___
       ansible.builtin.service:
         name: vector
         state: restarted
+#Основной блок выполнения
+#Определяем и загружаем дистрибутив
   tasks:
     - block:
         - name: Get vector distrib
           ansible.builtin.get_url:
             url: "https://yum.vector.dev/stable/vector-0/x86_64/vector-0.34.1-1.x86_64.rpm"
             dest: "./vector-0.34.1-1.x86_64.rpm"
+#Запускаем установку
     - name: Install clickhouse packages
       become: true
       ansible.builtin.yum:
         name:
           - vector-0.34.1-1.x86_64.rpm
       notify: Start vector service
+#Отчищаем историю выполнения handlers
     - name: Flush handlers
       meta: flush_handlers
+#Переписываем файл конфигурации Vector согласно шаблону
     - name: write using jinja2
       ansible.builtin.template:
          src: ./group_vars/vector.yaml.j2
@@ -123,6 +135,7 @@ ___
          dest: /etc/vector/vector.yaml
          owner: bin
          group: wheel
+#Дополнительный способ перезапустить службу после установки
     - name: Restart Vector
       become: true
       ansible.builtin.command: "systemctl restart vector"

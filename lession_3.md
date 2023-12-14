@@ -33,7 +33,7 @@ ___
 ![Ветка с исходными файлами](https://github.com/MaximovAA/school/blob/main/06_03-playbook-2.jpg "Пример вывода команд")
 ___
 
-![Ветка с исходными файлами](https://github.com/MaximovAA/school/blob/main/06_03-playbook-2.jpg "Пример вывода команд")
+![Ветка с исходными файлами](https://github.com/MaximovAA/school/blob/main/06_03-lighthouse.jpg "Пример вывода команд")
 
 ___
 

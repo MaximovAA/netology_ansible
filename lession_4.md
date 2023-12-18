@@ -36,3 +36,13 @@
 9. Переработайте playbook на использование roles. Не забудьте про зависимости LightHouse и возможности совмещения `roles` с `tasks`.
 10. Выложите playbook в репозиторий.
 11. В ответе дайте ссылки на оба репозитория с roles и одну ссылку на репозиторий с playbook.
+
+
+![изображение](https://github.com/MaximovAA/school/blob/main/06-04-playbook.jpg "Скрин")
+---
+**Ссылки на репозитории**
+---
+[vector-role](https://github.com/MaximovAA/vector-role)
+[lighthouse-role](https://github.com/MaximovAA/lighthouse-role)
+[playbook](https://github.com/MaximovAA/netology_ansible/tree/main/ansible4)
+---

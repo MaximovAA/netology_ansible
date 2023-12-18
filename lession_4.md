@@ -42,7 +42,10 @@
 ---
 **Ссылки на репозитории**
 ---
-[vector-role](https://github.com/MaximovAA/vector-role)
-[lighthouse-role](https://github.com/MaximovAA/lighthouse-role)
-[playbook](https://github.com/MaximovAA/netology_ansible/tree/main/ansible4)
+[vector-role](https://github.com/MaximovAA/vector-role)  
+
+[lighthouse-role](https://github.com/MaximovAA/lighthouse-role)  
+
+[playbook](https://github.com/MaximovAA/netology_ansible/tree/main/ansible4)  
+
 ---

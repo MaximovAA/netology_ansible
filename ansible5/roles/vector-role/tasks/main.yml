@@ -66,5 +66,3 @@
     group: vector
     mode: "0644"
     backup: true
-#  notify:
-#    - Restart vector service

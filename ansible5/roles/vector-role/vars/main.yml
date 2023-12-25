@@ -1,0 +1,5 @@
+---
+# vars file for vector-role
+vector_version: "0.34.1"
+vector_data_dir: "/etc/vector"
+vector_yaml: "vector.yaml.j2"

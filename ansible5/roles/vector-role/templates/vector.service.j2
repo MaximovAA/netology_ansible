@@ -1,0 +1,10 @@
+[Unit]
+Description=Vector service
+[Service]
+User=vector
+Group=vector
+ExecStartPre=/usr/local/bin/vector validate
+ExecStart=/usr/local/bin/vector --config-yaml {{ vector_data_dir }}/vector.yaml --watch-config
+ExecReload=/usr/local/bin/vector validate
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=always

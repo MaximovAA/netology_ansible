@@ -1,0 +1,5 @@
+---
+- name: vector install tar
+  ansible.builtin.yum:
+    name:
+      - tar

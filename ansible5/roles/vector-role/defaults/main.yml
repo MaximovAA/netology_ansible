@@ -1,0 +1,10 @@
+---
+# defaults file for vector-role
+clickhouse_table: "logs_table"
+clickhouse_db: "logs"
+clickhouse_url: "http://10.128.0.19:8123"
+checksum_rpm: "sha1:0425ff071083302e50f6004cf9ae6678a0594f37"
+checksum_deb: "sha1:6293c33a8cab377b3bc50d7a182c58e05cde6140"
+pkg_mgr:
+ - apt
+ - yum

@@ -1,0 +1,70 @@
+---
+# tasks file for vector-role
+- name: vector apt install tar
+  ansible.builtin.include_tasks:
+    file: "pre_install/apt.yml"
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  ignore_errors: true
+- name: vector yum install tar
+  ansible.builtin.include_tasks:
+    file: "pre_install/yum.yml"
+  ignore_errors: true
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+- name: Add a group vector
+  group:
+    name: vector
+    state: present
+- name: Add user vector
+  user:
+    name: vector
+    groups: vector
+    append: yes
+- name: vector get distrib
+  ansible.builtin.get_url:
+    url: "https://packages.timber.io/vector/{{ vector_version }}/vector-{{ vector_version }}-x86_64-unknown-linux-musl.tar.gz"
+    dest: "./vector-{{ vector_version }}-x86_64-unknown-linux-musl.tar.gz"
+    mode: "755"
+- name: vector unpack distrib
+  ansible.builtin.unarchive:
+    src: "./vector-{{ vector_version }}-x86_64-unknown-linux-musl.tar.gz"
+    dest: "./"
+    remote_src: true
+- name: vector install
+  become: true
+  ansible.builtin.copy:
+    src: "vector-x86_64-unknown-linux-musl/bin/vector"
+    dest: "/usr/local/bin/"
+    remote_src: true
+    mode: "755"
+- name: vector check installed version
+  ansible.builtin.command:
+    cmd: vector --version
+  register: result
+  changed_when:
+    - 'vector_version not in result.stdout'
+  tags:
+    - vector_check_version
+- name: vector create data dir
+  become: true
+  ansible.builtin.file:
+    mode: "755"
+    owner: vector
+    group: vector
+    path: "{{ vector_data_dir }}"
+    state: "directory"
+- name: write using jinja2
+  ansible.builtin.template:
+    src: "{{ vector_yaml }}"
+    mode: 0644
+    dest: "{{ vector_data_dir}}/vector.yaml"
+- name: vector | register as service
+  become: true
+  ansible.builtin.template:
+    src: "templates/vector.service.j2"
+    dest: "/etc/systemd/system/vector.service"
+    owner: vector
+    group: vector
+    mode: "0644"
+    backup: true
+#  notify:
+#    - Restart vector service

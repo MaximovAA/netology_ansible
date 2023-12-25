@@ -1,0 +1,19 @@
+---
+# This is an example playbook to execute Ansible tests.
+
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: 'Gather Local Users'
+      ansible.builtin.getent:
+        database: passwd
+      become: true
+    - name: 'Gather Local Groups'
+      ansible.builtin.getent:
+        database: group
+      become: true
+    - name: 'Gather Installed Packages'
+      ansible.builtin.package_facts:
+        manager: auto
+      become: true

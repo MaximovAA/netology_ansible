@@ -160,11 +160,13 @@ if __name__ == '__main__':
 
 **Шаг 3.** Заполните файл в соответствии с требованиями Ansible так, чтобы он выполнял основную задачу: module должен создавать текстовый файл на удалённом хосте по пути, определённом в параметре `path`, с содержимым, определённым в параметре `content`.
 
-**Шаг 4.** Проверьте module на исполняемость локально.
+**Шаг 4.** Проверьте module на исполняемость локально.  
+![screen](https://github.com/MaximovAA/school/blob/main/06-06-change.jpg "sample")
 
 **Шаг 5.** Напишите single task playbook и используйте module в нём.
 
-**Шаг 6.** Проверьте через playbook на идемпотентность.
+**Шаг 6.** Проверьте через playbook на идемпотентность.  
+![screen](https://github.com/MaximovAA/school/blob/main/06-06-playbook.jpg "sample")
 
 **Шаг 7.** Выйдите из виртуального окружения.
 
@@ -182,8 +184,10 @@ if __name__ == '__main__':
 
 **Шаг 14.** Создайте ещё одну директорию любого наименования, перенесите туда single task playbook и архив c collection.
 
-**Шаг 15.** Установите collection из локального архива: `ansible-galaxy collection install <archivename>.tar.gz`.
+**Шаг 15.** Установите collection из локального архива: `ansible-galaxy collection install <archivename>.tar.gz`.  
+![screen](https://github.com/MaximovAA/school/blob/main/06-06-install.jpg "sample")
 
-**Шаг 16.** Запустите playbook, убедитесь, что он работает.
+**Шаг 16.** Запустите playbook, убедитесь, что он работает.  
+![screen](https://github.com/MaximovAA/school/blob/main/06-06-collection.jpg "sample")
 
 **Шаг 17.** В ответ необходимо прислать ссылки на collection и tar.gz архив, а также скриншоты выполнения пунктов 4, 6, 15 и 16.

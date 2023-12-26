@@ -190,4 +190,6 @@ if __name__ == '__main__':
 **Шаг 16.** Запустите playbook, убедитесь, что он работает.  
 ![screen](https://github.com/MaximovAA/school/blob/main/06-06-collection.jpg "sample")
 
-**Шаг 17.** В ответ необходимо прислать ссылки на collection и tar.gz архив, а также скриншоты выполнения пунктов 4, 6, 15 и 16.
+**Шаг 17.** В ответ необходимо прислать ссылки на collection и tar.gz архив, а также скриншоты выполнения пунктов 4, 6, 15 и 16.  
+
+[Ссылка на репозиторий с коллекцией](https://github.com/MaximovAA/my_own_collection)
